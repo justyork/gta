@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans&display=swap');
+*{
+	margin: 0;
+	padding: 0;
+}
+h1,h2{
+
+}
+h1{
+	padding-top: 1.5%;
+}
+h2{
+	margin-top: 1.5%;
+}
+img{
+	padding-right: 1%;
+}
+#inner-header{
+	width: 100%;
+	background-color: #4d4d4d;
+	height: 200px
+}
+.text{
+	text-align: center;
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	font-style: Bold;
+	font-size: 28px;
+	line-height: 38px;	
+}
+
+body{
+	background-color: #4d4d4d;
+}
+
+.key-list{
+	position: absolute;
+	right: 80px;
+	bottom: 100px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	color: black;
+}
+.key-list.inverse{
+	color: white;
+}
+.key-list li{
+	margin-bottom: 20px;
+	text-align: right;
+}
+.key-list__text{
+	font-family: 'Open Sans', sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 27px;
+	display: inline-block;
+	align-items: center;
+	text-align: right;
+	margin-right: 8px;
+}
+
+.key-list__icon{
+	vertical-align: top;
+	font-family: 'Noto Sans', sans-serif;
+	background: white;
+	color: black;
+	border-radius: 3px;
+	border: 1px solid black;
+	display: inline-block;
+	height: 30px;
+	box-sizing: border-box;
+	width: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	line-height: 30px;
+	margin-right: 20px;
+}
+.key-list__icon:first-child{
+	margin-left: 0;
+}
+.key-list__icon.space{
+	width: 49px;
+	background: url("icons/space.svg") 50% 50% no-repeat white;
+	background-size: 20px;
+	font-size: 0;
+}
+.key-list__icon.enter{
+	background: url("icons/enter.svg") 50% 50% no-repeat white;
+	background-size: 20px;
+	font-size: 0;
+}
+.key-list__icon.backspace{
+	width: 49px;
+	background: url("icons/backspace.svg") 50% 50% no-repeat white;
+	background-size: 20px;
+	font-size: 0;
+}
+.key-list__icon.l_arrow, .key-list__icon.r_arrow,
+.key-list__icon.u_arrow, .key-list__icon.d_arrow{
+	font-size: 0;
+	background: url("icons/arrow.svg") 50% 50% no-repeat white;
+}
+.key-list__icon.l_arrow{transform: rotate(-90deg);}
+.key-list__icon.r_arrow{transform: rotate(90deg);}
+.key-list__icon.d_arrow{transform: rotate(180deg);}
