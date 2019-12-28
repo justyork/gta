@@ -19,7 +19,7 @@ class Keys extends React.Component{
 
         return (
             <React.Fragment>
-                <ul className="key-list inverse">
+                <ul className="key-list ">
                     {list}
                 </ul>
             </React.Fragment>
