@@ -40,9 +40,7 @@ class Menu extends React.Component{
                     </div>
                     <hr/>
                     <div className="menu__item-bottom">
-                        <div className="menu-bottom-widget">
-                            {this.buttonAction()}
-                        </div>
+                        {this.buttonAction()}
                         <div className="menu-bottom-description">
                             {this.state.activeData.Text}
                         </div>
