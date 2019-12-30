@@ -35,7 +35,7 @@ class Menu extends React.Component{
                 <div className={"menu__item menu__"+ (this.props.data.Position === 0 ? 'left' : 'right')}>
                     <h3>{data.Title}</h3>
                     <hr/>
-                    <div className="menu-list" ref={ (ref) => this.activeRef=ref }>
+                    <div className="menu-list" ref={ (ref) => this.activeRef = ref }>
                         {button_list}
                     </div>
                     <hr/>
@@ -149,8 +149,16 @@ class Menu extends React.Component{
     }
     scrollToMyRef(i) {
         const node = this._nodes.get(i);
+        const loc_list = this.activeRef.getBoundingClientRect();
+        const loc_node = node.getBoundingClientRect();
+
         if (node) {
-            ReactDOM.findDOMNode(node).scrollIntoView({block: 'end', behavior: 'smooth'});
+            let x = false;
+            if(loc_node.bottom > loc_list.bottom) x = (i-4) * 48
+            else if(loc_node.top < loc_list.top) x = i * 48
+
+            if(x !== false)
+                ReactDOM.findDOMNode(this.activeRef).scrollTo(0, x);
         }
     }
     componentDidMount() {
