@@ -29,7 +29,9 @@ class Progress extends React.Component{
     }
 
     setValue(e) {
-        this.setState({ value: e })
+        this.setState({ value: e },  () => {
+            this.update(this)
+        })
     }
     update() {
         this.props.update(this.state)

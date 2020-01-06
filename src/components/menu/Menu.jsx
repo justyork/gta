@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Progress from "./Progress";
 import Radio from "./Radio";
 import Slider from "./Slider";
-import ArrowKeysReact from 'arrow-keys-react';
 
 class Menu extends React.Component{
 
@@ -20,8 +19,6 @@ class Menu extends React.Component{
             activeButton: props.data.Active,
             activeData: activeData
         }
-
-
     }
 
     render() {
@@ -67,21 +64,24 @@ class Menu extends React.Component{
                     min={data.Data.min}
                     max={data.Data.max}
                     step={data.Data.step}
-                    value={data.Data.def}
+                    value={data.Data.value}
                     controll={canControll}
+                    update={this.handleChange.bind(this)}
                 />
                 break;
             case 2:
                 ret = <Slider
                     items={data.Data.images}
-                    default={data.Data.defaultIndex}
+                    value={data.Data.value}
                     controll={canControll}
+                    update={this.handleChange.bind(this)}
                 />
                 break;
             case 3:
                 ret = <Radio
-                    active={data.Data.def}
-                     items={data.Data.items} controll={canControll}
+                    value={data.Data.value}
+                    items={data.Data.items} controll={canControll}
+                    update={this.handleChange.bind(this)}
                 />
                 break;
             default:
@@ -90,6 +90,23 @@ class Menu extends React.Component{
 
 
         return (<div className="menu-bottom-widget">{ret}</div>)
+    }
+
+    /** Отслеживание переключений внутри виджетов и сохранение
+     *
+     * @param data
+     */
+    handleChange(data){
+        const elem = this.props.data
+
+        let newActiveData = this.state.activeData
+        newActiveData.Data.value = data.value
+        this.setState({
+            activeData: newActiveData
+        }, () => {
+            this.props.update(elem.UUID, this.state.activeButton, this.state.activeData)
+        })
+
     }
 
     /**
@@ -108,7 +125,10 @@ class Menu extends React.Component{
         )
     }
 
-
+    /** Назначить активный элемент менб
+     *
+     * @param id
+     */
     setActiveItem(id){
         this.setState({
             activeButton: id,
@@ -130,6 +150,11 @@ class Menu extends React.Component{
             return  this.state.activeButton - 1;
     }
 
+    /** Отслеживание нажатий кнопок
+     *
+     * @param event
+     * @returns {*}
+     */
     handleKeyDown(event) {
         if(this._isMounted && this.props.id === this.props.activeMenu){
             if(event.keyCode === 38){
@@ -147,6 +172,11 @@ class Menu extends React.Component{
 
         }
     }
+
+    /** Проскролить окно до нужного элемента меню
+     *
+     * @param i
+     */
     scrollToMyRef(i) {
         const node = this._nodes.get(i);
         const loc_list = this.activeRef.getBoundingClientRect();
@@ -170,7 +200,6 @@ class Menu extends React.Component{
         this._isMounted = false;
         window.removeEventListener("keydown", this.handleKeyDown, false);
     }
-
 }
 
 export default Menu;

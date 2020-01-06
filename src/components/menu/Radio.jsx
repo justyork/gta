@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 class Progress extends React.Component{
@@ -8,7 +7,7 @@ class Progress extends React.Component{
         super(props);
 
         this.state = {
-            isActive: props.active
+            value: props.value
         }
     }
 
@@ -26,28 +25,40 @@ class Progress extends React.Component{
         )
     }
 
+    /** Нажатие на кнопку
+     *
+     * @param index
+     */
     handleClick(index){
+        let isActive = index === 0
         this.setState({
-            isActive: index === 0
+            value: isActive
+        }, () => {
+            this.update(this)
         })
     }
 
     setActiveClass(index){
-        if(this.state.isActive && index === 0)
+        if(this.state.value && index === 0)
             return 'active'
-        else if(!this.state.isActive && index === 1)
+        else if(!this.state.value && index === 1)
             return 'active'
         return  ''
     }
 
-
+    /** Переключение нажатием на клавиши
+     *
+     * @param event
+     */
     handleKeyDown(event) {
-        if(this._isMounted && this.props.controll){
-            let isActive = this.state.isActive
+        if(this._isMounted && this.props.controll && [39, 37].includes(event.keyCode)){
+            let isActive = this.state.value
             if(event.keyCode === 39) isActive = false;
             if(event.keyCode === 37) isActive = true;
             this.setState({
-                isActive: isActive
+                value: isActive
+            }, () => {
+                this.update(this)
             })
         }
     }
@@ -60,6 +71,9 @@ class Progress extends React.Component{
     componentWillUnmount() {
         this._isMounted = false;
         window.removeEventListener("keydown", this.handleKeyDown, false);
+    }
+    update() {
+        this.props.update(this.state)
     }
 
 }

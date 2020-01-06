@@ -42,7 +42,7 @@ class Test extends React.Component {
 
 	render() {
 
-		let menu = this.menu.Items.map((val, index) => <Menu activeMenu={this.state.activeMenu} key={index} id={index} data={val} />)
+		let menu = this.menu.Items.map((val, index) => <Menu update={this.onUpdate.bind(this)} activeMenu={this.state.activeMenu} key={index} id={index} data={val} />)
 		return(
 			<React.Fragment>
 				{/*<div id="header">*/}
@@ -57,9 +57,21 @@ class Test extends React.Component {
 				{/*		keys={this.state.keys}*/}
 				{/*	/>*/}
 				{/*</div>*/}
-				<div className="menu">{menu}</div>
+				<div className="menu" >{menu}</div>
 			</React.Fragment>
 		)
+	}
+
+	/** полученние данных из меню
+	 *
+	 * @param uuid
+	 * @param category
+	 * @param data
+	 */
+	onUpdate(uuid, category, data){
+		console.log('UUID: ' + uuid,
+			'Category: ' + category,
+			data )
 	}
 
 	/**
@@ -80,7 +92,7 @@ class Test extends React.Component {
 					Text: "Описание прогресбара",
 					Bottom: 1, // 1 - прогрессбар
 					Data: {
-						def: 5,
+						value: 5,
 						min: 0,
 						max: 10,
 						step: 1,
@@ -91,7 +103,7 @@ class Test extends React.Component {
 					Text: "Описание слайдера",
 					Bottom: 2, // 2 - слайдер
 					Data: {
-						defaultIndex: 1,
+						value: 1,
 						images: ["/images/1.jpg", "/images/2.jpg", "/images/3.jpg", "/images/2.jpg", ]
 					}
 				},
@@ -100,7 +112,7 @@ class Test extends React.Component {
 					Text: "Описание переключателя",
 					Bottom: 3, // 3 - radio button
 					Data: {
-						def: false,
+						value: false,
 						items: ['Вкл', 'Выкл']
 					}
 				},
