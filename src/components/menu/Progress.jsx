@@ -37,7 +37,7 @@ class Progress extends React.Component{
         this.props.update(this.state)
     }
     handleKeyDown(event) {
-        if(this._isMounted && this.props.controll){
+        if(this._isMounted && this.props.controll && [39, 37].includes(event.keyCode)){
             let val = this.state.value
             if(event.keyCode === 37) val = this.decreaseValue()
             if(event.keyCode === 39) val = this.increaseValue()
